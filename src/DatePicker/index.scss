@@ -1,0 +1,43 @@
+@import '../global.scss';
+
+section {
+    margin-left: 25px;
+
+    #wrapper-date-picker {
+        position: relative;
+        width: 334px;
+    }
+
+    #btn-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 334px;
+        height: 50px;
+        background-color: white;
+        border-radius: 0 0 $radius $radius;
+
+        #btn-previous-day,
+        #btn-next-day {
+            position: relative;
+            padding: 0.3em 0.5em 0.4em 1.5em;
+        }
+        #btn-previous-day::before,
+        #btn-next-day::before {
+            content: '';
+            position: absolute;
+            border-color: var(--text);
+            border-style: solid;
+            border-width: 0 0.18em 0.18em 0;
+            height: 0.65em;
+            top: 1.6em; /* 1.3 */
+            left: 0.7em; /* 0.6 */
+            margin-top: -1em;
+            transform: rotate(135deg);
+            width: 0.65em;
+        }
+        #btn-next-day::before {
+            transform: rotate(-45deg);
+        }
+    }
+}
