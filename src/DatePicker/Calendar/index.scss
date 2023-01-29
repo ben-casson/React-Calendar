@@ -1,0 +1,21 @@
+@import '../../global.scss';
+
+#calendar {
+    position: absolute;
+    width: 334px;
+    height: 362px;
+    background-color: white;
+    box-shadow: $box-shadow;
+    border-radius: 0 0 $radius $radius;
+    z-index: -10;
+}
+
+.open {
+    transform: translateY(-50px);
+    transition: transform 0.3s;
+}
+
+.closed {
+    transform: translateY(-100%);
+    transition: transform 0.3s;
+}
