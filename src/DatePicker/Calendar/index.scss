@@ -4,10 +4,28 @@
     position: absolute;
     width: 334px;
     height: 362px;
+    padding-top: 60px;
     background-color: white;
     box-shadow: $box-shadow;
     border-radius: 0 0 $radius $radius;
     z-index: -10;
+
+    #content {
+        margin: 10px;
+
+        #month-year-week-container {
+            height: 76px;
+            border: $border;
+
+            #month-year-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                height: 44px;
+                background-color: $color-gray-700;
+            }
+        }
+    }
 }
 
 .open {
