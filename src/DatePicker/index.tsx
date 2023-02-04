@@ -2,8 +2,14 @@ import { useState } from 'react';
 import Calendar from './Calendar';
 import './index.scss';
 
-export default function DatePicker() {
+interface DatePickerProps {
+    selectedDate: string;
+}
+
+export default function DatePicker({ selectedDate }: DatePickerProps) {
     const [isOpen, setIsOpen] = useState(false);
+
+    let monthDayText = selectedDate.slice(4, 7) + ' ' + selectedDate.slice(8, 10);
 
     return (
         <section>
@@ -16,11 +22,11 @@ export default function DatePicker() {
                             setIsOpen(!isOpen);
                         }}
                     >
-                        Today
+                        {monthDayText}
                     </button>
                     <button id='btn-next-day' title='Go to the next day'></button>
                 </div>
-                <Calendar isOpen={isOpen} />
+                <Calendar isOpen={isOpen} selectedDate={selectedDate} />
             </div>
         </section>
     );
