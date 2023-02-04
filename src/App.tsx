@@ -5,10 +5,12 @@ import DatePicker from './DatePicker';
 
 
 function App() {
+    const [selectedDate, setSelectedDate] = useState('Sat Feb 04 2023');
+
 
     return (
         <>
-            <DatePicker />
+            <DatePicker selectedDate={selectedDate} />
         </>
     );
 }
