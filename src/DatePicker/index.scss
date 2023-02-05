@@ -20,11 +20,12 @@ section {
         padding: 0 10px;
 
         #btn-selected-day {
-            height: 36px;
+            height: 60px; /* 36 */
             width: 220px;
             border: none;
-            border-radius: $radius;
+            // border-radius: 1em;
             background-color: $color-white;
+            color: $color-gray-100;
             font-size: 18px;
             font-weight: 500;
         }
