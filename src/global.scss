@@ -1,11 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 $color-blue-700: #f3f6ff;
 $color-gray-100: #1c1c1c;
-$color-gray-300: #d0d7df;
-$color-gray-500: #e7e7e7;
-$color-gray-700: #f5f5f5;
+$color-gray-200: #3f3f3f;
+$color-gray-300: #676767;
+$color-gray-400: #8b8b8b;
+$color-gray-500: #d0d7df;
+$color-gray-700: #e7e7e7;
+$color-gray-900: #f5f5f5;
 $color-white: #fff;
-$box-shadow: 0 0 20px 5px $color-gray-300;
-$border: 1px solid $color-gray-500;
+$box-shadow: 0 0 20px 5px $color-gray-500;
+$border: 1px solid $color-gray-700;
 $radius: 0.65em;
 
 :root {
