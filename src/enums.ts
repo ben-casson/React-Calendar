@@ -14,7 +14,7 @@ export enum DaysInMonth {
     Dec = 31,
 }
 
-export enum daysOfWeek {
+export enum DaysOfWeek {
     Sun,
     Mon,
     Tue,
