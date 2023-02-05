@@ -1,13 +1,47 @@
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { DaysInMonth, DaysOfWeek } from '../../enums';
+import Day from './Day';
 import './index.scss';
 
-interface CalendarProps {
+interface ICalendarProps {
     isOpen: boolean;
     selectedDate: string;
+    setSelectedDate?: Dispatch<SetStateAction<string>>;
 }
 
-export default function Calendar({ isOpen, selectedDate }: CalendarProps) {
-    let date = new Date();
-    console.log(date.toDateString());
+type Day = {
+    date: string;
+    number: number;
+    content: string;
+};
+
+export default function Calendar({ isOpen, selectedDate, setSelectedDate }: ICalendarProps) {
+    const [daysArray, setDaysArray] = useState(Array<JSX.Element>);
+
+    let dayOfWeek = selectedDate.slice(0, 3);
+    let currentMonth = selectedDate.slice(4, 7);
+    let currentYear = selectedDate.slice(11);
+    let monthLength = DaysInMonth[currentMonth as keyof typeof DaysInMonth];
+    let firstDayOfMonth = new Date(`01 ${currentMonth} ${currentYear}`).getDay();
+    console.log(firstDayOfMonth)
+    useEffect(() => {
+        // console.log(monthLength)
+        // console.log(dayOfWeek)
+        // console.log(firstDayOfMonth)
+        let tempArray = [...daysArray];
+        for (let i = 0; i <= monthLength + firstDayOfMonth - 1; i++) {
+            if (i < firstDayOfMonth ) {
+                tempArray.push(<div key={i}></div>)
+                // console.log(i)
+            }
+            else {
+                tempArray.push(<Day key={i} number={i - firstDayOfMonth + 1} />)
+            }
+            // console.log(i)
+        }
+        setDaysArray(tempArray);
+        console.log(daysArray)
+    }, [selectedDate]);
 
     let monthYearText = selectedDate.slice(4, 7) + ' ' + selectedDate.slice(11);
 
@@ -22,7 +56,17 @@ export default function Calendar({ isOpen, selectedDate }: CalendarProps) {
                         <button id='btn-next-month'></button>
                         <button id='btn-next-year'></button>
                     </div>
+                    <div id='week-container'>
+                        <div className='week'>Sun</div>
+                        <div className='week'>Mon</div>
+                        <div className='week'>Tue</div>
+                        <div className='week'>Wed</div>
+                        <div className='week'>Thu</div>
+                        <div className='week'>Fri</div>
+                        <div className='week'>Sat</div>
+                    </div>
                 </div>
+                <div id='days-container'>{daysArray.map((element) => element)}</div>
             </div>
         </div>
     );
