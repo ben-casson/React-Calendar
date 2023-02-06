@@ -3,7 +3,7 @@
 #calendar {
     position: absolute;
     width: 334px;
-    height: 422px; /* 372 */
+    height: 431px; /* 372 */
     padding-top: 60px;
     background-color: $color-white;
     box-shadow: $box-shadow;
@@ -11,7 +11,7 @@
     z-index: -10;
 
     #content {
-        margin: 0 9px 9px 9px;
+        margin: 9px;
 
         #month-year-week-container {
             height: 76px;
@@ -64,35 +64,35 @@
                 }
 
                 #btn-previous-year::before {
-                    top: 79px;
+                    top: 88px;
                     left: 33px;
                 }
 
                 #btn-previous-year::after {
-                    top: 79px;
+                    top: 88px;
                     left: 39px;
 
                 }
 
                 #btn-next-year::before {
-                    top: 79px;
+                    top: 88px;
                     left: 287px;
                     transform: rotate(-45deg);
                 }
 
                 #btn-next-year::after {
-                    top: 79px;
+                    top: 88px;
                     left: 293px;
                     transform: rotate(-45deg);
                 }
 
                 #btn-previous-month::before {
-                    top: 79px;
+                    top: 88px;
                     left: 92px;
                 }
 
                 #btn-next-month::before {
-                    top: 79px;
+                    top: 88px;
                     left: 236px;
                     transform: rotate(-45deg);
                 }
