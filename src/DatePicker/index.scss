@@ -17,7 +17,7 @@ section {
         width: 334px;
         background-color: $color-white;
         border-radius: 0 0 $radius $radius;
-        padding: 0 10px;
+        // padding: 0 10px;
 
         #btn-selected-day {
             height: 60px; /* 36 */
@@ -37,13 +37,22 @@ section {
         #btn-previous-day,
         #btn-next-day {
             position: relative;
-            height: 36px;
-            width: 36px;
+            height: 60px; /* 36 */
+            width: 57px; /* 36 */
             // padding: 0.3em 0.5em 0.4em 1.5em;
-            border-radius: 50%;
+            border-radius: 0 0 0 10px;
             border: none;
             background-color: $color-white;
         }
+
+        #btn-previous-day {
+            border-radius: 0 0 0 10px;
+        }
+
+        #btn-next-day {
+            border-radius: 0 0 10px 0px;
+        }
+
         #btn-previous-day:hover,
         #btn-next-day:hover {
             background-color: $color-blue-700;
