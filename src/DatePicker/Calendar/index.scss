@@ -24,6 +24,78 @@
                 height: 44px;
                 background-color: $color-gray-900;
                 color: $color-gray-200;
+
+                #btn-previous-year,
+                #btn-previous-month,
+                #btn-next-year,
+                #btn-next-month {
+                    height: 44px;
+                    width: 33px; /* 33px */
+                    background-color: $color-gray-900;
+                    border: none;
+                    cursor: pointer;
+                }
+
+                
+                #btn-previous-year::before,
+                #btn-previous-year::after,
+                #btn-next-year::before,
+                #btn-next-year::after,
+                #btn-previous-month::before,
+                #btn-next-month::before {
+                    content: '';
+                    position: absolute;
+                    border-color: $color-gray-100;
+                    border-style: solid;
+                    border-width: 0 0.13em 0.13em 0;
+                    height: 0.7em;
+                    width: 0.7em;
+                    transform: rotate(135deg);
+                }
+
+                #btn-previous-year:hover::before,
+                #btn-previous-year:hover::after,
+                #btn-next-year:hover::before,
+                #btn-next-year:hover::after,
+                #btn-previous-month:hover::before,
+                #btn-next-month:hover::before {
+                    border-color: $color-black;
+                    // border-width: 0 0.15em 0.15em 0;
+                }
+
+                #btn-previous-year::before {
+                    top: 79px;
+                    left: 33px;
+                }
+
+                #btn-previous-year::after {
+                    top: 79px;
+                    left: 39px;
+
+                }
+
+                #btn-next-year::before {
+                    top: 79px;
+                    left: 287px;
+                    transform: rotate(-45deg);
+                }
+
+                #btn-next-year::after {
+                    top: 79px;
+                    left: 293px;
+                    transform: rotate(-45deg);
+                }
+
+                #btn-previous-month::before {
+                    top: 79px;
+                    left: 92px;
+                }
+
+                #btn-next-month::before {
+                    top: 79px;
+                    left: 236px;
+                    transform: rotate(-45deg);
+                }
             }
 
             #week-container {
