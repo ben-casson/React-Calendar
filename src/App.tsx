@@ -18,15 +18,17 @@ export const months = [
 ];
 
 function App() {
-    let date = new Date();
-    console.log(date.toDateString());
-
-    // const [selectedDate, setSelectedDate] = useState('Tue Apr 04 2023');
     const [selectedDate, setSelectedDate] = useState(new Date().toDateString());
+    const [calendarDisplayDate, setCalendarDisplayDate] = useState(selectedDate);
 
     return (
         <>
-            <DatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+            <DatePicker
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                calendarDisplayDate={calendarDisplayDate}
+                setCalendarDisplayDate={setCalendarDisplayDate}
+            />
         </>
     );
 }
