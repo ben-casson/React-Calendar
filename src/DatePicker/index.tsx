@@ -6,25 +6,48 @@ import './index.scss';
 interface IDatePickerProps {
     selectedDate: string;
     setSelectedDate: Dispatch<SetStateAction<string>>;
+    calendarDisplayDate: string;
+    setCalendarDisplayDate: Dispatch<SetStateAction<string>>;
 }
 
-export default function DatePicker({ selectedDate, setSelectedDate }: IDatePickerProps) {
+export default function DatePicker({
+    selectedDate,
+    setSelectedDate,
+    calendarDisplayDate,
+    setCalendarDisplayDate,
+}: IDatePickerProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [daysArray, setDaysArray] = useState(Array<JSX.Element>);
 
     let monthDayText = selectedDate.slice(4, 7) + ' ' + selectedDate.slice(8, 10);
 
-    function getPreviousMonth() {
+    function changeMonth(timeDirection: string) {
         setDaysArray([]);
         let currentMonth = months.findIndex(
-            (element) => element.month == `${selectedDate.slice(4, 7)}`
+            (element) => element.month == `${calendarDisplayDate.slice(4, 7)}`
         );
-        let newMonth = currentMonth === 0 ? months.length - 1 : currentMonth - 1;
-        let newYear =
-            currentMonth === 0 ? parseInt(selectedDate.slice(11)) - 1 : selectedDate.slice(11);
-        let tempDate = selectedDate.slice(0, 4) + months[newMonth].month + selectedDate.slice(7, 11) + newYear;
-        setSelectedDate(tempDate);
-        console.log(selectedDate);
+        let newMonth;
+        let newYear;
+        if (timeDirection === 'previous') {
+            newMonth = currentMonth === 0 ? months.length - 1 : currentMonth - 1;
+            newYear =
+                currentMonth === 0
+                    ? parseInt(calendarDisplayDate.slice(11)) - 1
+                    : calendarDisplayDate.slice(11);
+        } else {
+            newMonth = currentMonth === months.length - 1 ? 0 : currentMonth + 1;
+            newYear =
+                currentMonth === months.length - 1
+                    ? parseInt(calendarDisplayDate.slice(11)) + 1
+                    : calendarDisplayDate.slice(11);
+        }
+        let tempDate =
+            calendarDisplayDate.slice(0, 4) +
+            months[newMonth].month +
+            calendarDisplayDate.slice(7, 11) +
+            newYear;
+        setCalendarDisplayDate(tempDate);
+        console.log(calendarDisplayDate);
     }
 
     return (
@@ -36,6 +59,14 @@ export default function DatePicker({ selectedDate, setSelectedDate }: IDatePicke
                         id='btn-selected-day'
                         onClick={() => {
                             setIsOpen(!isOpen);
+                            if (
+                                !isOpen &&
+                                (calendarDisplayDate.slice(4, 7) !== selectedDate.slice(4, 7) ||
+                                    calendarDisplayDate.slice(11) !== selectedDate.slice(11))
+                            ) {
+                                setDaysArray([]);
+                                setCalendarDisplayDate(selectedDate);
+                            }
                         }}
                     >
                         {monthDayText}
@@ -46,9 +77,11 @@ export default function DatePicker({ selectedDate, setSelectedDate }: IDatePicke
                     isOpen={isOpen}
                     daysArray={daysArray}
                     setDaysArray={setDaysArray}
-                    getPreviousMonth={getPreviousMonth}
+                    changeMonth={changeMonth}
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
+                    calendarDisplayDate={calendarDisplayDate}
+                    setCalendarDisplayDate={setCalendarDisplayDate}
                 />
             </div>
         </section>
