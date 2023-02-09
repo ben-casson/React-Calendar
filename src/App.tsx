@@ -17,6 +17,8 @@ export const months = [
     { month: 'Dec', days: 31 },
 ];
 
+export const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 function App() {
     const [selectedDate, setSelectedDate] = useState(new Date().toDateString());
     const [calendarDisplayDate, setCalendarDisplayDate] = useState(selectedDate);
