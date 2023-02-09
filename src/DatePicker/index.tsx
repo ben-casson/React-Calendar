@@ -1,6 +1,7 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import Calendar from './Calendar';
 import { months } from '../App';
+import { daysOfWeek } from '../App';
 import './index.scss';
 
 interface IDatePickerProps {
@@ -50,6 +51,26 @@ export default function DatePicker({
         console.log(calendarDisplayDate);
     }
 
+    function changeYear(timeDirection: string) {
+        setDaysArray([]);
+        let newYear =
+            timeDirection === 'previous'
+                ? parseInt(calendarDisplayDate.slice(11)) - 1
+                : parseInt(calendarDisplayDate.slice(11)) + 1;
+        let dayOfWeek: number = new Date(`01 ${calendarDisplayDate.slice(4, 7)} ${newYear}`).getDay()
+        console.log('dayOfWeek ' + dayOfWeek)        
+        let firstDayOfMonth = daysOfWeek[dayOfWeek];
+        console.log('firstDayOfMonth ' + firstDayOfMonth) 
+        console.log('newYear ' + newYear) 
+        let tempDate =
+            firstDayOfMonth + ' ' +
+            calendarDisplayDate.slice(4, 7) +
+            ' 01 ' +
+            newYear;
+            console.log('tempDate ' + tempDate)
+        setCalendarDisplayDate(tempDate);
+    }
+
     return (
         <section>
             <div id='wrapper-date-picker'>
@@ -77,6 +98,7 @@ export default function DatePicker({
                     isOpen={isOpen}
                     daysArray={daysArray}
                     setDaysArray={setDaysArray}
+                    changeYear={changeYear}
                     changeMonth={changeMonth}
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
