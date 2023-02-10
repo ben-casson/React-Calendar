@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { DaysInMonth, DaysOfWeek } from '../../enums';
-import { months } from '../../App';
+import { months, daysOfWeek } from '../../App';
 import Day from './Day';
 import './index.scss';
 
 interface ICalendarProps {
     isOpen: boolean;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
     daysArray: Array<JSX.Element>;
     setDaysArray: Dispatch<SetStateAction<Array<JSX.Element>>>;
     changeYear: Function;
@@ -24,6 +25,7 @@ type Day = {
 
 export default function Calendar({
     isOpen,
+    setIsOpen,
     daysArray,
     setDaysArray,
     changeYear,
@@ -33,7 +35,8 @@ export default function Calendar({
     calendarDisplayDate,
     setCalendarDisplayDate,
 }: ICalendarProps) {
-    
+    const [dayStyle, setDayStyle] = useState('btn-day');
+
     let dayOfWeek = calendarDisplayDate.slice(0, 3);
     let currentMonth = calendarDisplayDate.slice(4, 7);
     let currentYear = calendarDisplayDate.slice(11);
@@ -48,29 +51,40 @@ export default function Calendar({
             if (i < firstDayOfMonth) {
                 tempArray.push(<div key={i}></div>);
             } else {
-                tempArray.push(<Day key={i} number={i - firstDayOfMonth + 1} />);
+                tempArray.push(
+                    <Day
+                        key={i}
+                        isOpen={isOpen}
+                        setIsOpen={setIsOpen}
+                        dayStyle={dayStyle}
+                        setDayStyle={setDayStyle}
+                        number={i - firstDayOfMonth + 1}
+                        selectedDate={selectedDate}
+                        setSelectedDate={setSelectedDate}
+                        calendarDisplayDate={calendarDisplayDate}
+                    />
+                );
             }
         }
         setDaysArray(tempArray);
         console.log(daysArray);
     }, [calendarDisplayDate]);
-    
+
     function isLeapYear(year: number): boolean {
         if (year % 4 !== 0) {
             return false;
-        }
-        else if (year % 100 !== 0) {
+        } else if (year % 100 !== 0) {
             return true;
-        }
-        else if (year % 400 !== 0) {
+        } else if (year % 400 !== 0) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
-    
+
     let monthYearText = calendarDisplayDate.slice(4, 7) + ' ' + calendarDisplayDate.slice(11);
+
+    useEffect(() => {}, [selectedDate]);
 
     return (
         <div id='calendar' className={isOpen ? 'open' : 'closed'}>
