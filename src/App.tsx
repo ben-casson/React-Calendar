@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.scss';
 import DatePicker from './DatePicker';
+import PageContent from './PageContent';
 
 export const months = [
     { month: 'Jan', days: 31 },
@@ -22,14 +23,24 @@ export const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 function App() {
     const [selectedDate, setSelectedDate] = useState(new Date().toDateString());
     const [calendarDisplayDate, setCalendarDisplayDate] = useState(selectedDate);
+    const [notes, setNotes] = useState([{ date: `${selectedDate}`, text: 'test text' }]);
+    const [notesMap, setNotesMap] = useState(new Map<string, string>());
 
     return (
         <>
             <DatePicker
+                notes={notes}
+                setNotes={setNotes}
                 selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}
                 calendarDisplayDate={calendarDisplayDate}
                 setCalendarDisplayDate={setCalendarDisplayDate}
+            />
+            <PageContent
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                notesMap={notesMap}
+                setNotesMap={setNotesMap}
             />
         </>
     );
