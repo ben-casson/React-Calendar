@@ -8,3 +8,14 @@
     font-size: 16px;
     color: $color-gray-100;
 }
+
+.today {
+    border: 2px solid $color-blue-300;
+}
+
+.selected {
+    background-color: $color-blue-300;
+    color: $color-white;
+    font-size: 17px;
+    // font-weight: bold;
+}
