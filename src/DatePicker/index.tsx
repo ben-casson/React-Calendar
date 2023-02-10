@@ -1,10 +1,11 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import Calendar from './Calendar';
-import { months } from '../App';
-import { daysOfWeek } from '../App';
+import { months, daysOfWeek } from '../App';
 import './index.scss';
 
 interface IDatePickerProps {
+    notes: {date: string, text: string}[];
+    setNotes: Dispatch<SetStateAction<{date: string, text: string}[]>>;
     selectedDate: string;
     setSelectedDate: Dispatch<SetStateAction<string>>;
     calendarDisplayDate: string;
@@ -12,6 +13,8 @@ interface IDatePickerProps {
 }
 
 export default function DatePicker({
+    notes,
+    setNotes,
     selectedDate,
     setSelectedDate,
     calendarDisplayDate,
@@ -57,17 +60,18 @@ export default function DatePicker({
             timeDirection === 'previous'
                 ? parseInt(calendarDisplayDate.slice(11)) - 1
                 : parseInt(calendarDisplayDate.slice(11)) + 1;
-        let dayOfWeek: number = new Date(`01 ${calendarDisplayDate.slice(4, 7)} ${newYear}`).getDay()
-        console.log('dayOfWeek ' + dayOfWeek)        
+        let dayOfWeek: number = new Date(
+            `01 ${calendarDisplayDate.slice(4, 7)} ${newYear}`
+        ).getDay();
+        console.log('dayOfWeek ' + dayOfWeek);
         let firstDayOfMonth = daysOfWeek[dayOfWeek];
-        console.log('firstDayOfMonth ' + firstDayOfMonth) 
-        console.log('newYear ' + newYear) 
+        console.log('firstDayOfMonth ' + firstDayOfMonth);
+        console.log('newYear ' + newYear);
+        // let tempDate = firstDayOfMonth + ' ' + calendarDisplayDate.slice(4, 7) + ' 01 ' + newYear;
         let tempDate =
-            firstDayOfMonth + ' ' +
-            calendarDisplayDate.slice(4, 7) +
-            ' 01 ' +
+            calendarDisplayDate.slice(0, 11) +
             newYear;
-            console.log('tempDate ' + tempDate)
+        console.log('tempDate ' + tempDate);
         setCalendarDisplayDate(tempDate);
     }
 
@@ -96,6 +100,7 @@ export default function DatePicker({
                 </div>
                 <Calendar
                     isOpen={isOpen}
+                    setIsOpen={setIsOpen}
                     daysArray={daysArray}
                     setDaysArray={setDaysArray}
                     changeYear={changeYear}
