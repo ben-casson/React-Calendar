@@ -6,8 +6,6 @@ interface IDayProps {
     number: number;
     isOpen: boolean;
     setIsOpen: Dispatch<SetStateAction<boolean>>;
-    dayStyle: string;
-    setDayStyle: Dispatch<SetStateAction<string>>;
     selectedDate: string;
     setSelectedDate: Dispatch<SetStateAction<string>>;
     calendarDisplayDate: string;
@@ -20,8 +18,6 @@ export default function Day({
     number,
     isOpen,
     setIsOpen,
-    dayStyle,
-    setDayStyle,
     selectedDate,
     setSelectedDate,
     calendarDisplayDate,
