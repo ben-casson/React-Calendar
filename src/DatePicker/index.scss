@@ -33,7 +33,7 @@ section {
         }
         #btn-selected-day:hover {
             cursor: pointer;
-            background-color: $color-blue-700;
+            background-color: $color-blue-600;
         }
 
         #btn-previous-day,
@@ -57,7 +57,7 @@ section {
 
         #btn-previous-day:hover,
         #btn-next-day:hover {
-            background-color: $color-blue-700;
+            background-color: $color-blue-600;
             cursor: pointer;
         }
         #btn-previous-day::before,
