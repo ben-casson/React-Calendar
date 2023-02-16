@@ -15,6 +15,7 @@ interface ICalendarProps {
     setSelectedDate: Dispatch<SetStateAction<string>>;
     calendarDisplayDate: string;
     setCalendarDisplayDate: Dispatch<SetStateAction<string>>;
+    createDays: Function;
 }
 
 type Day = {
@@ -23,7 +24,7 @@ type Day = {
     content: string;
 };
 
-export default function Calendar({
+export function Calendar({
     isOpen,
     setIsOpen,
     daysArray,
@@ -34,74 +35,67 @@ export default function Calendar({
     setSelectedDate,
     calendarDisplayDate,
     setCalendarDisplayDate,
+    createDays,
 }: ICalendarProps) {
     const [dayStyle, setDayStyle] = useState('btn-day');
-    const [selectedDay, setSelectedDay] = useState(selectedDate);
+    // const [selectedDay, setSelectedDay] = useState(selectedDate);
 
-    function handleClick(number: number, date: string) {
-        let month = calendarDisplayDate.slice(4, 7);
-        let year = calendarDisplayDate.slice(11);
-        let day = number < 10 ? '0' + number.toString() : number;
-        let dayofWeek = daysOfWeek[new Date(`${day} ${month} ${year}`).getDay()];
-        setSelectedDate(`${dayofWeek + ' ' + month + ' ' + day + ' ' + year}`);
-        // setDayStyle('btn-day selected');
-        console.log('selected day' + number);
-        console.log('1: ' + new Date().toDateString());
-        console.log('2: ' + calendarDisplayDate);
-        setSelectedDay(date)
-    }
+    // function handleClick(number: number, date: string) {
+    //     // setIsOpen(!isOpen)
+    //     let month = calendarDisplayDate.slice(4, 7);
+    //     let year = calendarDisplayDate.slice(11);
+    //     let day = number < 10 ? '0' + number.toString() : number;
+    //     let dayofWeek = daysOfWeek[new Date(`${day} ${month} ${year}`).getDay()];
+    //     setSelectedDate(`${dayofWeek + ' ' + month + ' ' + day + ' ' + year}`);
+    //     // setDayStyle('btn-day selected');
+    //     console.log('selected day' + number);
+    //     console.log('1: ' + new Date().toDateString());
+    //     console.log('2: ' + calendarDisplayDate);
+    //     setSelectedDay(date)
+    // }
 
-    let dayOfWeek = calendarDisplayDate.slice(0, 3);
-    let currentMonth = calendarDisplayDate.slice(4, 7);
-    let currentYear = calendarDisplayDate.slice(11);
-    let monthLength = DaysInMonth[currentMonth as keyof typeof DaysInMonth];
-    monthLength = currentMonth === 'Feb' && isLeapYear(parseInt(currentYear)) ? 29 : monthLength;
-    let firstDayOfMonth = new Date(`01 ${currentMonth} ${currentYear}`).getDay();
+    // let dayOfWeek = calendarDisplayDate.slice(0, 3);
+    // let currentMonth = calendarDisplayDate.slice(4, 7);
+    // let currentYear = calendarDisplayDate.slice(11);
+    // let monthLength = DaysInMonth[currentMonth as keyof typeof DaysInMonth];
+    // monthLength = currentMonth === 'Feb' && isLeapYear(parseInt(currentYear)) ? 29 : monthLength;
+    // let firstDayOfMonth = new Date(`01 ${currentMonth} ${currentYear}`).getDay();
     // console.log('firstDayOfMonth ' + firstDayOfMonth);
 
-    useEffect(() => {
-        // let tempArray = [...daysArray];
-        let tempArray = []
-        for (let i = 0; i <= monthLength + firstDayOfMonth - 1; i++) {
-            if (i < firstDayOfMonth) {
-                tempArray.push(<div key={i}></div>);
-            } else {
-                tempArray.push(
-                    <Day
-                        key={i}
-                        isOpen={isOpen}
-                        setIsOpen={setIsOpen}
-                        dayStyle={dayStyle}
-                        setDayStyle={setDayStyle}
-                        number={i - firstDayOfMonth + 1}
-                        selectedDate={selectedDate}
-                        setSelectedDate={setSelectedDate}
-                        calendarDisplayDate={calendarDisplayDate}
-                        handleClick={handleClick}
-                        selectedDay={selectedDay}
-                        setSelectedDay={setSelectedDay}
-                    />
-                );
-            }
-        }
-        setDaysArray(tempArray);
-        console.log(daysArray);
-    }, [selectedDate, calendarDisplayDate]); 
+    // useEffect(() => {
+    //     // let tempArray = [...daysArray];
+    //     let tempArray = []
+    //     for (let i = 0; i <= monthLength + firstDayOfMonth - 1; i++) {
+    //         if (i < firstDayOfMonth) {
+    //             tempArray.push(<div key={i}></div>);
+    //         } else {
+    //             tempArray.push(
+    //                 <Day
+    //                     key={i}
+    //                     isOpen={isOpen}
+    //                     setIsOpen={setIsOpen}
+    //                     dayStyle={dayStyle}
+    //                     setDayStyle={setDayStyle}
+    //                     number={i - firstDayOfMonth + 1}
+    //                     selectedDate={selectedDate}
+    //                     setSelectedDate={setSelectedDate}
+    //                     calendarDisplayDate={calendarDisplayDate}
+    //                     handleClick={handleClick}
+    //                     selectedDay={selectedDay}
+    //                     setSelectedDay={setSelectedDay}
+    //                 />
+    //             );
+    //         }
+    //     }
+    //     setDaysArray(tempArray);
+    //     console.log(daysArray);
+    // }, [selectedDate, calendarDisplayDate]); //, isOpen
 
-    function isLeapYear(year: number): boolean {
-        if (year % 4 !== 0) {
-            return false;
-        } else if (year % 100 !== 0) {
-            return true;
-        } else if (year % 400 !== 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+    useEffect(() => {
+        createDays()
+    }, [selectedDate])
 
     let monthYearText = calendarDisplayDate.slice(4, 7) + ' ' + calendarDisplayDate.slice(11);
-
 
     return (
         <div id='calendar' className={isOpen ? 'open' : 'closed'}>
@@ -134,4 +128,16 @@ export default function Calendar({
             </div>
         </div>
     );
+}
+
+export function isLeapYear(year: number): boolean {
+    if (year % 4 !== 0) {
+        return false;
+    } else if (year % 100 !== 0) {
+        return true;
+    } else if (year % 400 !== 0) {
+        return false;
+    } else {
+        return true;
+    }
 }
