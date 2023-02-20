@@ -8,7 +8,7 @@
     gap: 20px;
     position: absolute;
     width: 100%;
-    margin-top: 20vh;
+    margin-top: 15dvh;
 
     h1 {
         font-size: 28px;
@@ -16,9 +16,10 @@
 
     textarea {
         width: 500px;
-        min-height: 200px;
-        max-height: 70vh;
+        min-height: calc(85dvh - 68px); /* 200px */
+        // max-height: 70vh;
         padding: 10px;
+        margin-bottom: 20px;
         font-size: 16px;
         resize: none;
         background-color: $color-white;
@@ -40,7 +41,7 @@
     #page-content-container {
         textarea {
             width: calc(100vw - 20px);
-            max-height: 55vh;
+            // max-height: 55vh;
         }
     }
 }
